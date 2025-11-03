@@ -1,0 +1,70 @@
+﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:GraafikPiip"
+             x:Class="GraafikPiip.App">
+    <Application.Resources>
+        <ResourceDictionary>
+
+            <!-- Базовая палитра (есть Gray200/500, чтобы ссылки не падали) -->
+            <Color x:Key="Gray50">#F9FAFB</Color>
+            <Color x:Key="Gray100">#F3F4F6</Color>
+            <Color x:Key="Gray200">#E5E7EB</Color>
+            <Color x:Key="Gray300">#D1D5DB</Color>
+            <Color x:Key="Gray400">#9CA3AF</Color>
+            <Color x:Key="Gray500">#6B7280</Color>
+            <Color x:Key="Gray600">#4B5563</Color>
+            <Color x:Key="Gray700">#374151</Color>
+            <Color x:Key="Gray800">#1F2937</Color>
+            <Color x:Key="Gray900">#111827</Color>
+
+            <!-- Наша тёмная палитра страницы -->
+            <Color x:Key="BgTop">#0F0F13</Color>
+            <Color x:Key="BgBottom">#181B22</Color>
+            <Color x:Key="Card">#16191F</Color>
+            <Color x:Key="Stroke">#242A33</Color>
+            <Color x:Key="TextPrimary">#F3F4F6</Color>
+            <Color x:Key="TextSecondary">#9AA0A6</Color>
+            <Color x:Key="Accent">#6E7BFF</Color>
+            <Color x:Key="Danger">#E66A6A</Color>
+
+            <LinearGradientBrush x:Key="PageGradient" StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="{StaticResource BgTop}" Offset="0"/>
+                <GradientStop Color="{StaticResource BgBottom}" Offset="1"/>
+            </LinearGradientBrush>
+
+            <!-- Стили -->
+            <Style x:Key="H1" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource TextPrimary}" />
+                <Setter Property="FontSize" Value="24" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+
+            <Style x:Key="H2" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource TextSecondary}" />
+                <Setter Property="FontSize" Value="14" />
+            </Style>
+
+            <Style x:Key="Body" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource TextPrimary}" />
+                <Setter Property="FontSize" Value="15" />
+            </Style>
+
+            <Style x:Key="TonalButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#1E232B" />
+                <Setter Property="TextColor" Value="{StaticResource TextPrimary}" />
+                <Setter Property="CornerRadius" Value="12" />
+                <Setter Property="Padding" Value="16,12" />
+            </Style>
+
+            <Style x:Key="CardBorder" TargetType="Border">
+                <Setter Property="Background" Value="{StaticResource Card}" />
+                <Setter Property="Stroke" Value="{StaticResource Stroke}" />
+                <Setter Property="StrokeThickness" Value="1" />
+                <Setter Property="StrokeShape" Value="RoundRectangle 14" />
+                <Setter Property="Padding" Value="16" />
+            </Style>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

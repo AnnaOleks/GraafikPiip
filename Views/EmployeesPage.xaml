@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GraafikPiip.Views.EmployeesPage"
+             Title="Сотрудники"
+             BackgroundColor="#101010">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Bg">#101010</Color>
+            <Color x:Key="Card">#15161A</Color>
+            <Color x:Key="Stroke">#23252B</Color>
+            <Color x:Key="TextPri">#F3F4F6</Color>
+            <Color x:Key="TextSec">#A6AAB3</Color>
+            <Color x:Key="PinkGlow">#F04E9E</Color>
+            <Color x:Key="BtnBg">#000000</Color>
+
+            <Style x:Key="CardBorder" TargetType="Border">
+                <Setter Property="Background" Value="{StaticResource Card}" />
+                <Setter Property="Stroke" Value="{StaticResource Stroke}" />
+                <Setter Property="StrokeThickness" Value="1" />
+                <Setter Property="Padding" Value="12" />
+                <Setter Property="Margin" Value="8,6" />
+                <Setter Property="StrokeShape" Value="RoundRectangle 16" />
+            </Style>
+            
+            <Style x:Key="TonalButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource BtnBg}"/>
+                <Setter Property="TextColor" Value="{StaticResource TextPri}"/>
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="HeightRequest" Value="44"/>
+                <Setter Property="Padding" Value="12,0"/>
+                <Setter Property="Shadow">
+                    <Setter.Value>
+                        <Shadow 
+                Brush="#f04e9e"
+                Radius="10"/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid BackgroundColor="{StaticResource Bg}" Padding="16" RowDefinitions="Auto,*">
+        <Label 
+            Text="Команда" 
+            FontSize="22" 
+            TextColor="{StaticResource TextPri}" 
+            FontFamily="ElMessiri-Regular.ttf"/>
+        <Grid  
+    Grid.Row="0" 
+    ColumnDefinitions="*,*,*" 
+    ColumnSpacing="20">
+
+            <Button 
+                Grid.Column="0"
+                Text="Lisa"    
+                HorizontalOptions="Fill"
+                Style="{StaticResource TonalButton}" 
+                Command="{Binding LisaTootajaCommand}"
+                Margin="0,0,0,50"/>
+
+            <Button 
+                Grid.Column="1"
+                Text="Uuenda" 
+                HorizontalOptions="Fill"
+                Style="{StaticResource TonalButton}" 
+                Command="{Binding UuendaTootajaCommand}"
+                Margin="0,0,0,50"/>
+
+            <Button 
+                Grid.Column="2"
+                Text="Kustuta" 
+                HorizontalOptions="Fill"
+                Style="{StaticResource TonalButton}" 
+                Command="{Binding KustutaTootajaCommand}"
+                Margin="0,0,0,50"/> 
+
+        </Grid>
+
+        <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding Tootajad}"
+                        SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Style="{StaticResource CardBorder}">
+                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="14" VerticalOptions="Center">
+                            <!-- Круглое фото со свечением -->
+                            <Border WidthRequest="64" HeightRequest="64"
+                                    StrokeThickness="0">
+                                <Border.StrokeShape>
+                                    <Ellipse />
+                                </Border.StrokeShape>
+                                <Border.Shadow>
+                                    <Shadow Brush="{StaticResource GlowPink}" Radius="18" Opacity="0.8"/>
+                                </Border.Shadow>
+                                <Image Source="{Binding Photo}" Aspect="AspectFill">
+                                    <Image.Clip>
+                                        <EllipseGeometry Center="32,32" RadiusX="32" RadiusY="32"/>
+                                    </Image.Clip>
+                                </Image>
+                            </Border>
+
+                            <!-- Данные сотрудника -->
+                            <VerticalStackLayout Grid.Column="1" Spacing="4">
+                                <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
+                                    <BoxView WidthRequest="10" HeightRequest="10"
+                                             CornerRadius="5"
+                                             Color="{Binding Color}"/>
+                                    <Label Text="{Binding Name}" FontSize="18" TextColor="{StaticResource TextPri}" />
+                                </HorizontalStackLayout>
+
+                                <Label Text="{Binding Phone}" FontSize="14" TextColor="{StaticResource TextSec}" />
+
+                                <!-- На будущее: кнопки действий -->
+                                <!--<HorizontalStackLayout Spacing="12" Margin="0,6,0,0">
+                                    <Button Text="Редактировать" HeightRequest="34" />
+                                    <Button Text="Удалить" HeightRequest="34" />
+                                </HorizontalStackLayout>-->
+                            </VerticalStackLayout>
+
+                            <!-- Тап по карточке -->
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.OpenWorkerCommand}"
+                                                      CommandParameter="{Binding .}" />
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

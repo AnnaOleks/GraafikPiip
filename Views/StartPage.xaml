@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GraafikPiip.Views.StartPage"
+             Title="Главная"
+             BackgroundColor="#101010">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="18">
+            <Label 
+                Text="Планировщик смен" 
+                FontSize="32"
+                FontFamily="ElMessiri-Regular.ttf"
+                FontAttributes="Bold"
+                TextColor="White"
+                HorizontalTextAlignment="Center"
+                Margin="0,20,0,0"/>
+            <Label 
+                Text="{Binding PealkiriKuu}" 
+                FontSize="20"
+                FontFamily="ElMessiri-Regular.ttf"
+                TextColor="White"
+                HorizontalTextAlignment="Center"/>
+
+            <Border 
+                StrokeThickness="0"
+                BackgroundColor="#000000"
+                StrokeShape="RoundRectangle 24"
+                Margin="0,30,0,30">
+                <Border.Shadow>
+                    <Shadow 
+                        Brush="#f04e9e" 
+                        Radius="10"/>
+                </Border.Shadow>
+                <VerticalStackLayout 
+                    Padding="20" 
+                    Spacing="18">
+                    <Label 
+                        Text="Сегодня" 
+                        FontSize="25"
+                        FontFamily="ElMessiri-Regular.ttf"
+                        FontAttributes="Bold"
+                        TextColor="White"/>    
+                    <Label 
+                        Text="{Binding TanaKohtAvatud}" 
+                        FontSize="20"
+                        FontFamily="ElMessiri-Regular.ttf"
+                        TextColor="White"/>
+                    <Label 
+                        Text="{Binding TanaTootajadRida}"
+                        FontSize="20"
+                        FontFamily="ElMessiri-Regular.ttf"
+                        TextColor="White"/>             
+                    <Label 
+                        Text="{Binding TananeTuhimikuteRida}" 
+                        TextColor="{Binding TananeTuhimikuteVarv}" 
+                        FontSize="20"
+                        FontFamily="ElMessiri-Regular.ttf"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <VerticalStackLayout>
+                <Button
+                    Text="📅 Календарь месяца"
+                    Command="{Binding AvaKuuKalenderCommand}" 
+                    FontSize="20"
+                    FontFamily="ElMessiri-Regular.ttf"
+                    CornerRadius="15"
+                    BackgroundColor="Black"
+                    Margin="0,0,0,20">
+                    <Button.Shadow
+                        InputTransparent="True"  
+                        ZIndex="-1">
+                        <Shadow
+                            Brush="#f04e9e"
+                            Radius="10"
+                            />  
+                    </Button.Shadow>
+                </Button>
+
+                <Button
+                    Text="👤 Сотрудники"
+                    Command="{Binding AvaTootajadCommand}" 
+                    FontSize="20"
+                    FontFamily="ElMessiri-Regular.ttf"
+                    CornerRadius="15"
+                    BackgroundColor="Black"
+                    Margin="0,0,0,20">
+                    <Button.Shadow>
+                        <Shadow
+                            Brush="#f04e9e"
+                            Radius="10"/>
+                    </Button.Shadow>
+                </Button>
+
+                <Button
+                    Text="⚙️ Настройки расписания"
+                    Command="{Binding AvaSeadedCommand}"
+                    FontSize="20"
+                    FontFamily="ElMessiri-Regular.ttf"
+                    CornerRadius="15"
+                    BackgroundColor="Black">
+                    <Button.Shadow>
+                        <Shadow
+                            Brush="#f04e9e"
+                            Radius="10"/>
+                    </Button.Shadow>
+                </Button>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
