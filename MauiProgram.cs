@@ -14,11 +14,11 @@ namespace GraafikPiip
                 .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
-                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                    fonts.AddFont("ElMessiri-Regular.ttf", "ElMessiri");
+                    fonts.AddFont("ElMessiri-Regular.ttf", "ElMessiri");
                 });
 
-#if DEBUG
+
             // Views
             builder.Services.AddTransient<GraafikPiip.Views.StartPage>();
             builder.Services.AddTransient<GraafikPiip.Views.MonthCalendarPage>();
@@ -35,7 +35,7 @@ namespace GraafikPiip
             builder.Services.AddSingleton<GraafikPiip.Interface.ICalendarService, GraafikPiip.Services.CalendarService>();
             builder.Services.AddSingleton<AppDatabase>();
 
-
+#if DEBUG
 #endif
 
             return builder.Build();

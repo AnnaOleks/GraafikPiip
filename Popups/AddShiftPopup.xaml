@@ -1,64 +1,48 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Popup
+<toolkit:Popup
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     x:Class="GraafikPiip.Popups.AddShiftPopup"
-    CanBeDismissedByTappingOutside="False">
+    CanBeDismissedByTappingOutsideOfPopup="True">
 
-    <Border BackgroundColor="#16191F" Stroke="#242A33" StrokeThickness="1" Padding="20" StrokeShape="RoundRectangle 16">
-        <VerticalStackLayout Spacing="14" WidthRequest="320">
-            <Label Text="Добавить смену" FontSize="20" TextColor="#F3F4F6" HorizontalTextAlignment="Center"/>
-            <Label x:Name="LblDate" FontSize="13" TextColor="#9AA0A6" HorizontalTextAlignment="Center"/>
+    <VerticalStackLayout Padding="16" Spacing="12" BackgroundColor="#101010">
+        <Label x:Name="LblDate" TextColor="White" FontAttributes="Bold" FontSize="18"/>
 
-            <!-- Сотрудник -->
-            <VerticalStackLayout Spacing="6">
-                <Label Text="Сотрудник" TextColor="#F3F4F6"/>
-                <Picker x:Name="EmployeePicker"
-                Title="Выберите сотрудника"
-                ItemDisplayBinding="{Binding Name}"
-                SelectedIndexChanged="EmployeePicker_SelectedIndexChanged"/>
+        <Picker x:Name="EmployeePicker" Title="Сотрудник" />
+
+        <Grid ColumnDefinitions="*,*">
+            <VerticalStackLayout Grid.Column="0">
+                <Label Text="Начало" TextColor="#bbb"/>
+                <TimePicker x:Name="StartPicker" Time="09:00"/>
             </VerticalStackLayout>
-
-            <!-- Имя вручную (если выбран «Другой…») -->
-            <VerticalStackLayout x:Name="ManualNameBlock" Spacing="6" IsVisible="False">
-                <Label Text="Имя" TextColor="#F3F4F6"/>
-                <Entry x:Name="NameEntry" Placeholder="Например: Mari" TextColor="#F3F4F6" PlaceholderColor="#9AA0A6"/>
+            <VerticalStackLayout Grid.Column="1">
+                <Label Text="Конец" TextColor="#bbb"/>
+                <TimePicker x:Name="EndPicker" Time="18:00"/>
             </VerticalStackLayout>
+        </Grid>
 
-            <!-- Время -->
-            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
-                <VerticalStackLayout Grid.Column="0" Spacing="6">
-                    <Label Text="Начало" TextColor="#F3F4F6"/>
-                    <TimePicker x:Name="StartPicker" Time="09:00"/>
-                </VerticalStackLayout>
-                <VerticalStackLayout Grid.Column="1" Spacing="6">
-                    <Label Text="Конец" TextColor="#F3F4F6"/>
-                    <TimePicker x:Name="EndPicker" Time="18:00"/>
-                </VerticalStackLayout>
-            </Grid>
-
-            <!-- Цвет (можно переопределить цвет сотрудника) -->
-            <VerticalStackLayout Spacing="6">
-                <Label Text="Цвет метки" TextColor="#F3F4F6"/>
-                <Picker x:Name="ColorPicker" Title="Выберите цвет">
-                    <Picker.Items>
-                        <x:String>Розовый</x:String>
-                        <x:String>Голубой</x:String>
-                        <x:String>Зелёный</x:String>
-                        <x:String>Жёлтый</x:String>
-                        <x:String>Фиолетовый</x:String>
-                    </Picker.Items>
-                </Picker>
-            </VerticalStackLayout>
-
-            <Grid ColumnDefinitions="*,*" ColumnSpacing="12" Margin="0,6,0,0">
-                <Button Text="Отмена" BackgroundColor="#000000" TextColor="#F3F4F6" Clicked="Cancel_Clicked" />
-                <Button Grid.Column="1" Text="Сохранить" BackgroundColor="#000000" TextColor="#F3F4F6" Clicked="Save_Clicked">
-                    <Button.Shadow>
-                        <Shadow Brush="#f04e9e" Radius="10"/>
-                    </Button.Shadow>
-                </Button>
-            </Grid>
+        <!-- Доп. имя для «Другой…» -->
+        <VerticalStackLayout x:Name="ManualNameBlock" IsVisible="False">
+            <Label Text="Имя" TextColor="#bbb"/>
+            <Entry x:Name="NameEntry" Placeholder="Введите имя"/>
         </VerticalStackLayout>
-    </Border>
-</Popup>
+
+        <Picker x:Name="ColorPicker" Title="Цвет"
+                ItemsSource="{x:Static sys:String.Empty}">
+            <Picker.Items>
+                <x:String>Розовый</x:String>
+                <x:String>Голубой</x:String>
+                <x:String>Зелёный</x:String>
+                <x:String>Жёлтый</x:String>
+                <x:String>Фиолетовый</x:String>
+            </Picker.Items>
+        </Picker>
+
+        <Grid ColumnDefinitions="*,*">
+            <Button Text="Отмена" Clicked="Cancel_Clicked" Grid.Column="0"/>
+            <Button Text="Сохранить" Clicked="Save_Clicked" Grid.Column="1"
+                    BackgroundColor="#FF3DA1" TextColor="White"/>
+        </Grid>
+    </VerticalStackLayout>
+</toolkit:Popup>

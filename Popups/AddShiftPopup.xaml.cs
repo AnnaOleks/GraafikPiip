@@ -54,7 +54,7 @@ namespace GraafikPiip.Popups
             }
         }
 
-        private void Cancel_Clicked(object? sender, EventArgs e) => this.CloseAsync();
+        private async void Cancel_Clicked(object? sender, EventArgs e) => await this.CloseAsync();
 
         private async void Save_Clicked(object? sender, EventArgs e)
         {
@@ -82,12 +82,12 @@ namespace GraafikPiip.Popups
                            ?? opt.ColorHex
                            ?? "#92C5FF";
 
-            this.CloseAsync(new ShiftInput(
-                EmployeeId: manual ? null : opt.Id,
-                Name: name,
-                Start: start,
-                End: end,
-                ColorHex: colorHex));
+            this.Close(new ShiftInput(
+    EmployeeId: manual ? null : opt.Id,
+    Name: name,
+    Start: start,
+    End: end,
+    ColorHex: colorHex));
         }
         private string? SelectedPresetHex() => ColorPicker.SelectedItem?.ToString() switch
         {
