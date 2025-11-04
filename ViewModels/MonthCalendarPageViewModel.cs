@@ -47,7 +47,7 @@ public partial class MonthCalendarPageViewModel : ObservableObject
     [RelayCommand(CanExecute = nameof(CanEdit))]
     private async Task Lisa()
     {
-        if (ValitudPaev is null) return;
+       
 
         // Если список пуст — подгрузим на всякий
         if (Tootajad.Count == 0)
@@ -58,8 +58,13 @@ public partial class MonthCalendarPageViewModel : ObservableObject
 
         if (resultObj is not ShiftInput result) return;
 
+        await _calendar.AddShiftAsync(ValitudPaev.Kuupaev, result.EmployeeId, result.Start, result.End, result.ColorHex); // Раскомментировать и убедиться, что метод возвращает ID новой смены
+
         ValitudPaev.Tootajad.Add(new TootajaVaade
         {
+            TootajaId = result.EmployeeId, // Сохраняем ID работника
+            ShiftStart = new DateTime(result.Start.Ticks), // Сохраняем полное время
+            ShiftEnd = new DateTime(result.End.Ticks), // Сохраняем полное время
             Nimi = result.Name,
             Kellad = $"{new DateTime(result.Start.Ticks):HH\\:mm}–{new DateTime(result.End.Ticks):HH\\:mm}",
             Varv = Color.FromArgb(result.ColorHex)
@@ -192,7 +197,7 @@ public partial class MonthCalendarPageViewModel : ObservableObject
 
     private async Task LaadiTootajadAsync()
     {
-        
+
         var emps = await _calendar.GetEmployeesAsync();
         // ожидается IEnumerable<{ Id, Name, Color }>
         Tootajad.Clear();
@@ -218,8 +223,13 @@ public partial class MonthCalendarPageViewModel : ObservableObject
 
     public class TootajaVaade
     {
+        public int VahetusId { get; set; } // Добавление ID смены
+        public int TootajaId { get; set; } // Добавление ID работника
         public string Nimi { get; set; } = "";
         public Color Varv { get; set; } = Colors.White;
         public string Kellad { get; set; } = "";
+        // Дополнительно: хранить полные даты/время для обновления
+        public DateTime ShiftStart { get; set; }
+        public DateTime ShiftEnd { get; set; }
     }
 }
